@@ -9,13 +9,19 @@ import { styles } from "./styles";
 
 type Props = TouchableOpacityProps & {
   title: string;
+  style?: any;
+  textStyle?: any;
 };
 
-export default function Button({ title, ...rest }: Props) {
+export default function Button({ title, style, textStyle, ...rest }: Props) {
   return (
     <View>
-      <TouchableOpacity activeOpacity={0.8} style={styles.button} {...rest}>
-        <Text style={styles.title}>{title}</Text>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={[styles.button, style]}
+        {...rest}
+      >
+        <Text style={[styles.title, textStyle]}>{title}</Text>
       </TouchableOpacity>
     </View>
   );

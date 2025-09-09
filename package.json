@@ -13,9 +13,11 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo-google-fonts/reddit-sans": "^0.4.1",
     "@expo/vector-icons": "^14.1.0",
     "@react-navigation/native": "^7.1.6",
     "expo": "~53.0.22",
+    "expo-app-loading": "^2.1.1",
     "expo-font": "~13.3.2",
     "expo-linking": "~7.1.7",
     "expo-router": "~5.1.5",
