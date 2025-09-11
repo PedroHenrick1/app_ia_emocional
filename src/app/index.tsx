@@ -10,18 +10,12 @@ import Button from "@/components/button";
 import Input from "@/components/input";
 import { router } from "expo-router";
 
-import AppLoading from "expo-app-loading";
-
 export default function Index() {
   const [name, setName] = useState<string>();
   const [fontsLoaded] = useFonts({
     RedditSans_500Medium,
     RedditSans_700Bold,
   });
-
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
 
   function handleNext() {
     router.navigate("/dashboard");
@@ -48,12 +42,12 @@ export default function Index() {
         <Button
           title="Ajuda urgente"
           style={{ backgroundColor: "rgba(61, 133, 65, 1)" }}
+          onPress={() => router.navigate("/chatUrgente")}
         />
 
         <Button
           title="Criar uma conta"
           style={{ backgroundColor: "#59E1FF" }}
-          onPress={handleNext}
         />
       </View>
 
@@ -62,8 +56,8 @@ export default function Index() {
       <View style={styles.buttonCreateAccount}>
         <Button
           title="Fazer login"
-          style={{ backgroundColor: "#a7dbd8" }}
-          onPress={handleNext}
+          style={{ backgroundColor: "#757575ff" }}
+          onPress={() => router.navigate("/chatUrgente")}
         />
       </View>
     </View>
