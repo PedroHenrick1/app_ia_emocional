@@ -13,7 +13,9 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function ChatUrgente() {
-  const [messages, setMessages] = useState<{ id: string; text: string }[]>([]);
+  const [messages, setMessages] = useState<
+    { id: string; text: string; sender: string }[]
+  >([]);
   const [input, setInput] = useState("");
 
   async function getBotResponse(userMessage: string) {
@@ -34,12 +36,16 @@ export default function ChatUrgente() {
 
   async function sendMessage() {
     if (input.trim() === "") return;
-    const userMsg = { id: Date.now().toString(), text: input };
+    const userMsg = { id: Date.now().toString(), text: input, sender: "user" };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
 
     const botReply = await getBotResponse(input);
-    const botMsg = { id: (Date.now() + 1).toString(), text: botReply };
+    const botMsg = {
+      id: (Date.now() + 1).toString(),
+      text: botReply,
+      sender: "bot",
+    };
     setMessages((prev) => [...prev, botMsg]);
   }
 
@@ -54,8 +60,17 @@ export default function ChatUrgente() {
           data={messages}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <View style={styles.messageBubble}>
-              <Text style={styles.messageText}>{item.text}</Text>
+            <View>
+              <View
+                style={[
+                  styles.messageBubble,
+                  item.sender === "user"
+                    ? { alignSelf: "flex-end", backgroundColor: "#e0e4cc" }
+                    : { alignSelf: "flex-start", backgroundColor: "#d1e7dd" },
+                ]}
+              >
+                <Text style={styles.messageText}>{item.text}</Text>
+              </View>
             </View>
           )}
           style={styles.messagesList}
